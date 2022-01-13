@@ -17,7 +17,9 @@ const init = () => {
   db.serialize(() => {
     db.run(`CREATE TABLE users (
       firstname TEXT NOT NULL,
-      lastname TEXT
+      lastname TEXT,
+      userName TEXT NOT NULL,
+      password TEXT NOT NULL
     )`)
   })
 }
