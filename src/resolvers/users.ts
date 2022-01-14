@@ -7,9 +7,7 @@ const resolvers = {
             return await models.User.getUsers()
         },
         getUserAccount: async (_: unknown, input: Pick<User, 'userName' | 'password'>, { models }: Models) => {
-            
             const modelReturn = await models.User.getUserAccount(input.userName, input.password)
-
             return modelReturn
         },
     },
