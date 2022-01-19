@@ -16,7 +16,7 @@ async function startServer() {
     server = new ApolloServer({
         typeDefs,
         resolvers,
-        context: () => { models }
+        context: () => ({ models })
     })
 
     await server.start()
