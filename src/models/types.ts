@@ -1,7 +1,7 @@
 interface User {
-    id: String
-    firstname: string
-    lastname: string
+    id: string
+    firstName: string
+    lastName: string
     userName: string
     password: string
 }

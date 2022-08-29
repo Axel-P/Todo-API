@@ -1,21 +1,28 @@
-import { Models } from '../models'
-import { User } from '../models/types'
+import data from '../data'
+import { AuthenticationError } from 'apollo-server'
 
 const resolvers = {
+    Account: {
+        _resolveReference(object: {id: string}) {
+            return data.users.find(user => user.id === object.id) 
+        }   
+    },   
     Query: {
-        users: async (_: unknown, __: unknown, { models }: Models) => {
-            return await models.User.getUsers()
+        user(_:unknown, { id }:{ id:string }) {
+            return data.users.find(user => user.id === id)
         },
-        getUserAccount: async (_: unknown, input: Pick<User, 'userName' | 'password'>, { models }: Models) => {
-            const modelReturn = await models.User.getUserAccount(input.userName, input.password)
-            return modelReturn
-        },
+        users() {
+            try{
+                return data.users
+            }catch(e){
+                throw new AuthenticationError('You must be logged in to do this')
+            }
+        }
     },
     Mutation: {
-        createUser: async (_: unknown, { input: user }: { input: User }, { models }: Models) => {
-            const { id } = await models.User.createUser(user)
-            return { ...user, id }
-        },
+        login: async () => {
+            return "To be deleted"
+        }
     }
 }
 export default resolvers
