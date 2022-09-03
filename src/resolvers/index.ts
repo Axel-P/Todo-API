@@ -1,2 +1,2 @@
 import users from './users'
-export default [users]
+export default users
